@@ -27,6 +27,10 @@ public class CustomerController implements ICustomerController {
     public ResponseEntity<Object> createCustomer(@RequestBody UserCreateRequest userCreateRequest) {
         log.info(userCreateRequest);
 
-        return ResponseEntity.ok(userService.createCustomer(userCreateRequest));
+        return ResponseEntity.ok(
+                userService.createCustomer(userCreateRequest)
+                        .doOnSuccess(response -> log.info("User created successfully"))
+                        .doOnError(error -> log.info("Error with user create request"))
+        );
     }
 }

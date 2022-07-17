@@ -18,12 +18,13 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Mono<CustomerEntity> createCustomer(UserCreateRequest userCreateRequest) {
-        log.info("Creating user");
         CustomerEntity user = CustomerEntity.builder()
                 .firstName(userCreateRequest.getFirstName())
                 .lastName(userCreateRequest.getLastName())
                 .email(userCreateRequest.getEmail())
                 .build();
-        return customerRepository.save(user);
+        return customerRepository.save(user)
+                .doOnSuccess(response -> log.info("Successful customer saving"))
+                .doOnError(error -> log.info("Error while trying save customer"));
     }
 }

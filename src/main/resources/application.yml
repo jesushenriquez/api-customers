@@ -1,6 +1,8 @@
 spring:
   application:
     name: api-users
+  webflux:
+    base-path: /api-customers/1.0.0
   data:
     r2dbc:
       repositories.enabled: true

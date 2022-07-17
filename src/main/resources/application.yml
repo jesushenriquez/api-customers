@@ -1,6 +1,6 @@
 spring:
   application:
-    name: api-users
+    name: api-customers
   webflux:
     base-path: /api-customers/1.0.0
   data:

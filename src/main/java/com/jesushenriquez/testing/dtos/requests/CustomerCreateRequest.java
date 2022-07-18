@@ -10,7 +10,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class UserCreateRequest implements Serializable {
+public class CustomerCreateRequest implements Serializable {
     @Serial
     private static final long serialVersionUID = 8084395064601241532L;
 

@@ -1,7 +1,7 @@
 package com.jesushenriquez.testing.controllers.implementations;
 
 import com.jesushenriquez.testing.controllers.contracts.ICustomerController;
-import com.jesushenriquez.testing.dtos.requests.UserCreateRequest;
+import com.jesushenriquez.testing.dtos.requests.CustomerCreateRequest;
 import com.jesushenriquez.testing.services.contracts.ICustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,15 +20,15 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RequestMapping(path = CUSTOMER_CONTROLLER_PATH, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public class CustomerController implements ICustomerController {
 
-    private final ICustomerService userService;
+    private final ICustomerService customerService;
 
     @PostMapping
     @Override
-    public ResponseEntity<Object> createCustomer(@RequestBody UserCreateRequest userCreateRequest) {
-        log.info(userCreateRequest);
+    public ResponseEntity<Object> createCustomer(@RequestBody CustomerCreateRequest customerCreateRequest) {
+        log.info(customerCreateRequest);
 
         return ResponseEntity.ok(
-                userService.createCustomer(userCreateRequest)
+                customerService.createCustomer(customerCreateRequest)
                         .doOnSuccess(response -> log.info("User created successfully"))
                         .doOnError(error -> log.info("Error with user create request"))
         );

@@ -1,8 +1,8 @@
 package com.jesushenriquez.testing.services.implementations;
 
-import com.jesushenriquez.testing.dtos.requests.UserCreateRequest;
+import com.jesushenriquez.testing.dtos.requests.CustomerCreateRequest;
 import com.jesushenriquez.testing.repositories.entities.CustomerEntity;
-import com.jesushenriquez.testing.repositories.implementations.CustomerRepository;
+import com.jesushenriquez.testing.services.contracts.ICustomerManagementService;
 import com.jesushenriquez.testing.services.contracts.ICustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -14,17 +14,11 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class CustomerService implements ICustomerService {
 
-    private final CustomerRepository customerRepository;
+    private final ICustomerManagementService customerManagementService;
 
     @Override
-    public Mono<CustomerEntity> createCustomer(UserCreateRequest userCreateRequest) {
-        CustomerEntity user = CustomerEntity.builder()
-                .firstName(userCreateRequest.getFirstName())
-                .lastName(userCreateRequest.getLastName())
-                .email(userCreateRequest.getEmail())
-                .build();
-        return customerRepository.save(user)
-                .doOnSuccess(response -> log.info("Successful customer saving"))
-                .doOnError(error -> log.info("Error while trying save customer"));
+    public Mono<CustomerEntity> createCustomer(CustomerCreateRequest customerCreateRequest) {
+
+        return customerManagementService.saveCustomer(customerCreateRequest);
     }
 }

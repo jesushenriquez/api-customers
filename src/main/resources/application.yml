@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: api-customers
+  webflux:
+    base-path: /api-customers/1.0.0
+  data:
+    r2dbc:
+      repositories.enabled: true
+  r2dbc:
+    url: r2dbc:postgresql://127.0.0.1:5432/users
+    username: admin
+    password: password
+  h2:
+    console:
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+logging:
+  level:
+    org.springframework: ERROR
+    com: TRACE
+
+server:
+  port: 8000

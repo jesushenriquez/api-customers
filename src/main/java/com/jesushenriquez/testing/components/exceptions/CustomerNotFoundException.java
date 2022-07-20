@@ -4,9 +4,6 @@ import lombok.Getter;
 
 import java.io.Serial;
 
-/**
- * CustomerNotFoundException
- */
 @Getter
 public class CustomerNotFoundException extends RuntimeException {
 

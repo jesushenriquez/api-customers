@@ -8,6 +8,12 @@ This API provides some endpoints to execute CRUDs operations about users and was
 * [Maven](https://maven.apache.org/) - v3.8.5
 * [Java](https://jdk.java.net/) - v18.0.1.1
 
+## How to initialize project:
+
+You need to have a PostgresSQL database named User and run the script in the
+"scripts" folder. You can run docker-compose into docker folder to launch PostgresSQL in the 
+Docker environment.
+
 ## How to contribute:
 
 If you want to contribute, you can create a pull request.

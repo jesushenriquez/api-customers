@@ -7,6 +7,8 @@ import reactor.core.publisher.Mono;
 public interface ICustomerManagementService {
 
     Mono<CustomerEntity> saveCustomer(CustomerCreateRequest customerCreateRequest);
-    Mono<CustomerEntity> findCustomer(CustomerCreateRequest customerCreateRequest);
+    Mono<CustomerEntity> updateCustomer(String email, CustomerCreateRequest customerCreateRequest);
+    Mono<CustomerEntity> findCustomer(String email);
+    Mono<Void> deleteCustomer(String email);
 
 }

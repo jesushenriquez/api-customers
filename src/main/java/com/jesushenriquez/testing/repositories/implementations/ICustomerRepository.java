@@ -8,6 +8,7 @@ public interface ICustomerRepository extends ReactiveCrudRepository<CustomerEnti
 
     Mono<CustomerEntity> findByEmail(String email);
     Mono<Boolean> existsByEmail(String email);
+    Mono<Void> deleteByEmail(String email);
 
 
 }

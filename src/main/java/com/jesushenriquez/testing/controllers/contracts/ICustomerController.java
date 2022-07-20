@@ -6,4 +6,7 @@ import org.springframework.http.ResponseEntity;
 public interface ICustomerController {
 
     ResponseEntity<Object> createCustomer(CustomerCreateRequest customerCreateRequest);
+    ResponseEntity<Object> findCustomer(String email);
+    ResponseEntity<Object> updateCustomer(String email, CustomerCreateRequest customerCreateRequest);
+    ResponseEntity<Object> deleteCustomer(String email);
 }

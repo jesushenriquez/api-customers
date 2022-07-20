@@ -12,6 +12,9 @@ import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
+import static com.jesushenriquez.testing.utils.constants.CustomerResponseMessagesConstants.CUSTOMER_ALREADY_EXISTS_MESSAGE;
+import static com.jesushenriquez.testing.utils.constants.CustomerResponseMessagesConstants.CUSTOMER_NOT_FOUND_MESSAGE;
+
 @Log4j2
 @AllArgsConstructor
 @Service
@@ -24,7 +27,7 @@ public class CustomerManagementService implements ICustomerManagementService {
         return isCustomerExist(customerCreateRequest.getEmail())
                 .flatMap(result -> {
                     if (Boolean.TRUE.equals(result)) {
-                        return Mono.error(new CustomerNotFoundException(String.format("Customer %s not found", customerCreateRequest.getEmail())));
+                        return Mono.error(new CustomerNotFoundException(String.format(CUSTOMER_ALREADY_EXISTS_MESSAGE, customerCreateRequest.getEmail())));
                     }
 
                     CustomerEntity user = CustomerEntity.builder()
@@ -43,7 +46,7 @@ public class CustomerManagementService implements ICustomerManagementService {
         return findCustomer(email)
                 .flatMap(result -> {
                     if (Objects.isNull(result)) {
-                        return Mono.error(new CustomerNotFoundException(String.format("Customer %s not found", customerCreateRequest.getEmail())));
+                        return Mono.error(new CustomerNotFoundException(String.format(CUSTOMER_NOT_FOUND_MESSAGE, customerCreateRequest.getEmail())));
                     }
 
                     result.setFirstName(customerCreateRequest.getFirstName());
@@ -59,14 +62,14 @@ public class CustomerManagementService implements ICustomerManagementService {
     @Override
     public Mono<CustomerEntity> findCustomer(String email) {
         return customerRepository.findByEmail(email)
-                .switchIfEmpty(Mono.error(new CustomerNotFoundException(String.format("Customer %s not found", email))))
+                .switchIfEmpty(Mono.error(new CustomerNotFoundException(String.format(CUSTOMER_NOT_FOUND_MESSAGE, email))))
                 .doOnSuccess(response -> log.debug("Customer found"))
                 .doOnError(error -> log.debug("Customer not found"));
     }
 
     private Mono<Boolean> isCustomerExist(String email) {
         return customerRepository.existsByEmail(email)
-                .switchIfEmpty(Mono.error(new CustomerNotFoundException(String.format("Customer %s not found", email))))
+                .switchIfEmpty(Mono.error(new CustomerNotFoundException(String.format(CUSTOMER_NOT_FOUND_MESSAGE, email))))
                 .doOnSuccess(response -> log.debug("Customer found"))
                 .doOnError(error -> log.debug("Customer not found"));
     }
@@ -79,7 +82,7 @@ public class CustomerManagementService implements ICustomerManagementService {
                         return customerRepository.deleteByEmail(email);
                     }
 
-                    return Mono.error(new CustomerNotFoundException(String.format("Customer %s not found", email)));
+                    return Mono.error(new CustomerNotFoundException(String.format(CUSTOMER_NOT_FOUND_MESSAGE, email)));
                 })
                 .then()
                 .doOnSuccess(response -> log.debug("Customer deleted successfully"))

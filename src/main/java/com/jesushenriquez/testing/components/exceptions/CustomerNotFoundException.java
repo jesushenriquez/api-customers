@@ -1,4 +1,4 @@
-package com.jesushenriquez.testing.components;
+package com.jesushenriquez.testing.components.exceptions;
 
 import lombok.Getter;
 

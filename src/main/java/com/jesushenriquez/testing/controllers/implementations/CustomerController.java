@@ -76,7 +76,7 @@ public class CustomerController implements ICustomerController {
                         .build(), HttpStatus.OK))
                 .doOnSuccess(response -> log.info("Customer deleted successfully"))
                 .doOnError(error -> log.info("Error with customer delete request"))
-                .onErrorResume(CustomerNotFoundException.class, e -> Mono.just(new ResponseEntity<>(GenericResponse.<String>builder()
+                .onErrorResume(CustomerNotFoundException.class, e -> Mono.just(new ResponseEntity<Object>(GenericResponse.<String>builder()
                         .data(e.getErrorMessage())
                         .build(), HttpStatus.BAD_REQUEST)));
     }

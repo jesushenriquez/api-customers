@@ -18,6 +18,9 @@ Docker environment.
 
 If you want to contribute, you can create a pull request.
 
+### Considerations:
+- You will need to use the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) in your commits to understanding better all changes.
+
 ## Reference Documentation
 
 For further reference, please consider the following sections:
